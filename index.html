@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>កម្មវិធីអនុវត្តលំហាត់គណិតវិទ្យា ថ្នាក់ទី៩ - វិទ្យាល័យបឹងត្របែក</title>
+  
+  <!-- Font Kantumruy Pro -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- html2canvas សម្រាប់ទាញយករូបភាពផ្ទាំងលទ្ធផល -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>
+    :root {
+      --primary: #1d4ed8;
+      --primary-hover: #1e40af;
+      --primary-light: #eff6ff;
+      --primary-border: #bfdbfe;
+      --accent-gold: #d97706;
+      --success: #059669;
+      --danger: #dc2626;
+      --info: #0284c7;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius-xl: 20px;
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --shadow-xl: 0 20px 35px -8px rgba(0, 0, 0, 0.12), 0 10px 15px -4px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Kantumruy Pro', sans-serif;
+    }
+
+    body {
+      background: #f1f5f9;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 40px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 860px;
+    }
+
+    /* Screen Transition */
+    .screen {
+      display: none;
+      animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .screen.active {
+      display: block;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-xl);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-xl);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    /* SCREEN 1: Hero Banner */
+    .hero-banner {
+      background: linear-gradient(135deg, #1e3a8a 0%, #1e1b4b 60%, #312e81 100%);
+      border-radius: var(--radius-lg);
+      padding: 30px 24px;
+      color: white;
+      text-align: center;
+      margin-bottom: 26px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.3);
+    }
+
+    .hero-banner::before {
+      content: "";
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 140px;
+      height: 140px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+    }
+
+    .school-tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fef08a;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      margin-bottom: 12px;
+    }
+
+    .hero-banner h1 {
+      font-size: 1.65rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      line-height: 1.4;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-banner p {
+      font-size: 0.95rem;
+      color: #e0e7ff;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .difficulty-pills {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+    .pill-easy { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .pill-medium { background: rgba(245, 158, 11, 0.2); color: #fde68a; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .pill-hard { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3); }
+
+    /* Form Styles */
+    .form-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 640px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .card { padding: 22px 18px; }
+      .hero-banner { padding: 22px 16px; }
+      .hero-banner h1 { font-size: 1.35rem; }
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+
+    .req { color: var(--danger); }
+
+    .input-control {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      background: #f8fafc;
+      color: var(--text-main);
+      transition: all 0.2s;
+    }
+
+    .input-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.12);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+    .btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
+
+    .btn-success {
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+    }
+    .btn-success:hover { background: #047857; }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #475569 0%, #64748b 100%);
+      color: #fff;
+    }
+
+    .btn-outline {
+      background: #fff;
+      color: #334155;
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover:not(:disabled) {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    .btn-block { width: 100%; }
+
+    /* SCREEN 2: Quiz */
+    .quiz-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .quiz-progress-text {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .student-badge-bar {
+      font-size: 0.85rem;
+      color: #334155;
+      background: #e2e8f0;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 22px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #10b981);
+      width: 10%;
+      transition: width 0.3s ease;
+    }
+
+    .quiz-alert {
+      display: none;
+      background: #fef2f2;
+      border: 1px solid #fca5a5;
+      color: #b91c1c;
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+
+    .question-box {
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: var(--radius-lg);
+      padding: 24px 20px;
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .level-badge {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      margin-bottom: 10px;
+    }
+    .level-easy { background: #d1fae5; color: #065f46; }
+    .level-medium { background: #fef3c7; color: #92400e; }
+    .level-hard { background: #fee2e2; color: #991b1b; }
+
+    .question-instruction {
+      font-size: 0.92rem;
+      color: #64748b;
+      margin-bottom: 10px;
+    }
+
+    .expression-display {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0f172a;
+      letter-spacing: 0.5px;
+    }
+
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .option-card {
+      display: flex;
+      align-items: center;
+      padding: 14px 18px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      background: #fff;
+      transition: all 0.2s ease;
+    }
+
+    .option-card:hover {
+      border-color: #93c5fd;
+      background: #f8faff;
+      transform: translateX(3px);
+    }
+
+    .option-card.selected {
+      border-color: var(--primary);
+      background: #eff6ff;
+      box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.2);
+    }
+
+    .option-radio {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #94a3b8;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+
+    .option-card.selected .option-radio {
+      border-color: var(--primary);
+      background: var(--primary);
+    }
+
+    .option-card.selected .option-radio::after {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: #fff;
+      border-radius: 50%;
+    }
+
+    .option-label {
+      font-weight: 700;
+      color: #475569;
+      margin-right: 12px;
+      font-size: 1.05rem;
+    }
+
+    .option-card.selected .option-label { color: var(--primary); }
+
+    .option-text {
+      font-size: 1.1rem;
+      color: #1e293b;
+      font-weight: 500;
+    }
+
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* SCREEN 3: Results */
+    #capture-area {
+      padding: 10px;
+      border-radius: var(--radius-xl);
+      background: #ffffff;
+    }
+
+    .result-hero {
+      text-align: center;
+      padding-bottom: 20px;
+      border-bottom: 1.5px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .result-trophy { font-size: 3.5rem; margin-bottom: 4px; }
+    .result-title { font-size: 1.5rem; font-weight: 700; color: #0f172a; }
+    .result-subtitle { color: var(--text-muted); font-size: 0.95rem; }
+
+    .student-summary-card {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      margin-bottom: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+    }
+
+    .summary-field-title { font-size: 0.8rem; color: #64748b; font-weight: 500; }
+    .summary-field-val { font-size: 0.95rem; font-weight: 700; color: #1e293b; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .stat-card {
+      padding: 14px 10px;
+      border-radius: var(--radius-md);
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+
+    .stat-score { background: #eff6ff; border-color: #bfdbfe; }
+    .stat-pct { background: #faf5ff; border-color: #e9d5ff; }
+    .stat-correct { background: #ecfdf5; border-color: #a7f3d0; }
+    .stat-wrong { background: #fef2f2; border-color: #fecaca; }
+
+    .stat-number { font-size: 1.7rem; font-weight: 700; margin-bottom: 2px; }
+    .stat-score .stat-number { color: #1d4ed8; }
+    .stat-pct .stat-number { color: #7e22ce; }
+    .stat-correct .stat-number { color: #059669; }
+    .stat-wrong .stat-number { color: #dc2626; }
+    .stat-label { font-size: 0.85rem; font-weight: 600; color: #475569; }
+
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      margin-bottom: 22px;
+    }
+
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      background: #fff;
+    }
+
+    .review-table th {
+      background: #f8fafc;
+      padding: 10px 12px;
+      font-weight: 600;
+      color: #334155;
+      border-bottom: 1.5px solid var(--border);
+      text-align: left;
+    }
+
+    .review-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .badge-status {
+      display: inline-block;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .badge-correct { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+    .badge-wrong { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+
+    .btn-solution {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 0.82rem;
+      cursor: pointer;
+      text-decoration: underline;
+      display: block;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    .solution-box {
+      display: none;
+      margin-top: 6px;
+      padding: 8px 10px;
+      background: #f1f5f9;
+      border-left: 3px solid #6366f1;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: #334155;
+    }
+
+    .solution-box.show { display: block; }
+
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .footer-credit {
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 14px;
+      border-top: 1px dashed #cbd5e1;
+      font-size: 0.88rem;
+      color: #475569;
+      font-weight: 600;
+    }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .card { box-shadow: none; border: none; }
+      .action-buttons, .btn-solution { display: none !important; }
+      .solution-box { display: block !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- ================= SCREEN 1: Student Information & Hero ================= -->
+    <div id="screen-student-info" class="screen active card">
+      
+      <!-- High-End Hero Section -->
+      <div class="hero-banner">
+        <div class="school-tag">🏛️ សាលារៀនជំនាន់ថ្មី វិទ្យាល័យបឹងត្របែក</div>
+        <h1>កម្មវិធីអនុវត្តស្វ័យសិក្សាគណិតវិទ្យា ថ្នាក់ទី៩</h1>
+        <p>មេរៀន៖ ការដាក់កន្សោមដឺក្រេទី២ជាផលគុណកត្តា (តាមវិធីបំពេញជាការេ និងបន្ថែមបន្ថយតួ)</p>
+        
+        <div class="difficulty-pills">
+          <span class="pill pill-easy">🟢 ស្រួល (៤ សំណួរ)</span>
+          <span class="pill pill-medium">🟡 មធ្យម (៤ សំណួរ - តួទី២ លេខសេស)</span>
+          <span class="pill pill-hard">🔴 ពិបាក (២ សំណួរ - តួទី១ មេគុណខុសពី១)</span>
+        </div>
+      </div>
+
+      <h2 class="form-title">📝 បំពេញព័ត៌មានសិស្ស</h2>
+
+      <form id="student-form" onsubmit="event.preventDefault(); startQuiz();">
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="student-name">គោត្តនាម និងនាមសិស្ស <span class="req">*</span></label>
+            <input type="text" id="student-name" class="input-control" placeholder="ឧ. សុខ ចាន់ដារ៉ា" required />
+          </div>
+
+          <div class="form-group">
+            <label for="student-gender">ភេទ <span class="req">*</span></label>
+            <select id="student-gender" class="input-control" required>
+              <option value="">-- ជ្រើសរើសភេទ --</option>
+              <option value="ប្រុស">ប្រុស</option>
+              <option value="ស្រី">ស្រី</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="student-class">ថ្នាក់ / បន្ទប់សិក្សា <span class="req">*</span></label>
+            <input type="text" id="student-class" class="input-control" placeholder="ឧ. ថ្នាក់ទី ៩ ជំនាន់ថ្មី" required />
+          </div>
+
+          <div class="form-group">
+            <label for="student-id">អត្តលេខ / លេខរៀង</label>
+            <input type="text" id="student-id" class="input-control" placeholder="ឧ. NGS-0925" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="quiz-date">កាលបរិច្ឆេទ</label>
+          <input type="date" id="quiz-date" class="input-control" />
+        </div>
+
+        <div style="margin-top: 24px;">
+          <button type="submit" class="btn btn-primary btn-block" style="padding: 14px; font-size: 1.05rem;">
+            🚀 ចាប់ផ្តើមធ្វើលំហាត់ (១០ សំណួរ)
+          </button>
+        </div>
+      </form>
+
+      <div class="footer-credit">
+        ✨ រៀបរៀងដោយ៖ <strong>លោកគ្រូ ចាន់ សុខហេង</strong>
+      </div>
+    </div>
+
+    <!-- ================= SCREEN 2: Quiz Testing ================= -->
+    <div id="screen-quiz" class="screen card">
+      <div class="quiz-header-bar">
+        <div class="quiz-progress-text" id="quiz-progress-label">📝 លំហាត់ ១ / ១០</div>
+        <div class="student-badge-bar" id="quiz-student-tag"></div>
+      </div>
+
+      <!-- Progress Track -->
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-bar-fill"></div>
+      </div>
+
+      <!-- Alert -->
+      <div id="quiz-alert" class="quiz-alert">
+        ⚠️ សូមជ្រើសរើសចម្លើយមួយ (A, B, C ឬ D) ជាមុនសិន មុននឹងបន្តទៅមុខ!
+      </div>
+
+      <!-- Expression Display -->
+      <div class="question-box">
+        <div><span id="question-level-badge" class="level-badge level-easy">កម្រិត៖ ស្រួល</span></div>
+        <div class="question-instruction">ចូរដាក់កន្សោមដឺក្រេទី២ខាងក្រោមជាផលគុណកត្តា៖</div>
+        <div class="expression-display" id="question-expression"></div>
+      </div>
+
+      <!-- Options A, B, C, D -->
+      <div class="options-grid" id="options-container"></div>
+
+      <!-- Navigation -->
+      <div class="nav-bar">
+        <button id="btn-prev" class="btn btn-outline" onclick="prevQuestion()" disabled>
+          ← ថយក្រោយ
+        </button>
+
+        <button id="btn-next" class="btn btn-primary" onclick="nextQuestion()">
+          បន្ទាប់ →
+        </button>
+
+        <button id="btn-finish" class="btn btn-success" onclick="finishQuiz()" style="display: none;">
+          ✨ បញ្ចប់ និងមើលលទ្ធផល
+        </button>
+      </div>
+
+      <div class="footer-credit">
+        ✨ រៀបរៀងដោយ៖ <strong>លោកគ្រូ ចាន់ សុខហេង</strong>
+      </div>
+    </div>
+
+    <!-- ================= SCREEN 3: Result Summary ================= -->
+    <div id="screen-result" class="screen card">
+      
+      <!-- Capture Area សម្រាប់ប៊ូតុងទាញយករូបភាព PNG -->
+      <div id="capture-area">
+        <div class="result-hero">
+          <div class="school-tag" style="background:#1e3a8a; color:#fff; border:none; margin-bottom:8px;">
+            សាលារៀនជំនាន់ថ្មី វិទ្យាល័យបឹងត្របែក
+          </div>
+          <div class="result-trophy" id="result-emoji">🎉</div>
+          <h2 class="result-title" id="result-greeting">លទ្ធផលនៃការធ្វើលំហាត់</h2>
+          <p class="result-subtitle" id="result-feedback">ការខិតខំប្រឹងប្រែងរបស់អ្នកទទួលបានលទ្ធផលល្អ!</p>
+        </div>
+
+        <div class="student-summary-card">
+          <div>
+            <div class="summary-field-title">ឈ្មោះសិស្ស</div>
+            <div class="summary-field-val" id="res-name">-</div>
+          </div>
+          <div>
+            <div class="summary-field-title">ភេទ</div>
+            <div class="summary-field-val" id="res-gender">-</div>
+          </div>
+          <div>
+            <div class="summary-field-title">ថ្នាក់</div>
+            <div class="summary-field-val" id="res-class">-</div>
+          </div>
+          <div>
+            <div class="summary-field-title">អត្តលេខ / កាលបរិច្ឆេទ</div>
+            <div class="summary-field-val" id="res-id-date">-</div>
+          </div>
+        </div>
+
+        <!-- Scores -->
+        <div class="stats-grid">
+          <div class="stat-card stat-score">
+            <div class="stat-number" id="res-score">0 / 10</div>
+            <div class="stat-label">ពិន្ទុសរុប</div>
+          </div>
+          <div class="stat-card stat-pct">
+            <div class="stat-number" id="res-pct">0%</div>
+            <div class="stat-label">ភាគរយ</div>
+          </div>
+          <div class="stat-card stat-correct">
+            <div class="stat-number" id="res-correct">0</div>
+            <div class="stat-label">🟢 ត្រឹមត្រូវ</div>
+          </div>
+          <div class="stat-card stat-wrong">
+            <div class="stat-number" id="res-wrong">0</div>
+            <div class="stat-label">🔴 មិនត្រឹមត្រូវ</div>
+          </div>
+        </div>
+
+        <!-- Summary Table -->
+        <div style="font-weight: 700; margin-bottom: 12px; color: #1e293b;">
+          📊 តារាងផ្ទៀងផ្ទាត់ចម្លើយ និងដំណោះស្រាយលម្អិត
+        </div>
+
+        <div class="table-container">
+          <table class="review-table">
+            <thead>
+              <tr>
+                <th style="width: 8%;">ល.រ</th>
+                <th style="width: 32%;">កន្សោមលំហាត់</th>
+                <th style="width: 23%;">ចម្លើយសិស្ស</th>
+                <th style="width: 23%;">ចម្លើយត្រឹមត្រូវ</th>
+                <th style="width: 14%;">ស្ថានភាព</th>
+              </tr>
+            </thead>
+            <tbody id="review-table-body"></tbody>
+          </table>
+        </div>
+
+        <div class="footer-credit" style="margin-top: 10px; margin-bottom: 10px;">
+          ✨ រៀបរៀងដោយ៖ <strong>លោកគ្រូ ចាន់ សុខហេង</strong> | សាលារៀនជំនាន់ថ្មី វិទ្យាល័យបឹងត្របែក
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="btn btn-outline" onclick="restartQuiz()">
+          🔄 ធ្វើម្តងទៀត
+        </button>
+        <button class="btn btn-primary" onclick="downloadImage()">
+          📸 ទាញយករូបភាព (PNG)
+        </button>
+        <button class="btn btn-secondary" onclick="downloadCSV()">
+          ⬇️ ទាញយក (CSV)
+        </button>
+        <button class="btn btn-success" onclick="window.print()">
+          🖨️ បោះពុម្ព / PDF
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    // ១០ លំហាត់៖
+    // - ស្រួល (៤ សំណួរ)៖ រក្សាទុកដដែល
+    // - មធ្យម (៤ សំណួរ)៖ តួទី២ មានមេគុណជាលេខសេស (+5x, -7x, +3x, -9x)
+    // - ពិបាក (២ សំណួរ)៖ តួទី១ មានមេគុណខុសពីលេខ១ (2x², 3x²)
+    const questions = [
+      // ================= កម្រិតស្រួល (៤ លំហាត់ - រក្សាទុកដដែល) =================
+      {
+        id: 1,
+        level: "ស្រួល",
+        levelClass: "level-easy",
+        expression: "A = x² + 4x - 5",
+        options: [
+          { key: "A", text: "(x - 1)(x + 5)" },
+          { key: "B", text: "(x + 1)(x - 5)" },
+          { key: "C", text: "(x - 2)(x + 3)" },
+          { key: "D", text: "(x + 2)(x - 3)" }
+        ],
+        correct: "A",
+        solution: "x² + 4x - 5 = (x² + 4x + 4) - 4 - 5 = (x + 2)² - 9 = (x + 2)² - 3² = (x + 2 - 3)(x + 2 + 3) = (x - 1)(x + 5)"
+      },
+      {
+        id: 2,
+        level: "ស្រួល",
+        levelClass: "level-easy",
+        expression: "B = x² - 6x + 8",
+        options: [
+          { key: "A", text: "(x + 4)(x + 2)" },
+          { key: "B", text: "(x - 4)(x - 2)" },
+          { key: "C", text: "(x - 1)(x - 8)" },
+          { key: "D", text: "(x + 1)(x - 8)" }
+        ],
+        correct: "B",
+        solution: "x² - 6x + 8 = (x² - 6x + 9) - 9 + 8 = (x - 3)² - 1 = (x - 3 - 1)(x - 3 + 1) = (x - 4)(x - 2)"
+      },
+      {
+        id: 3,
+        level: "ស្រួល",
+        levelClass: "level-easy",
+        expression: "C = x² + 6x + 5",
+        options: [
+          { key: "A", text: "(x - 1)(x - 5)" },
+          { key: "B", text: "(x + 2)(x + 3)" },
+          { key: "C", text: "(x + 1)(x + 5)" },
+          { key: "D", text: "(x - 2)(x - 3)" }
+        ],
+        correct: "C",
+        solution: "x² + 6x + 5 = (x² + 6x + 9) - 9 + 5 = (x + 3)² - 4 = (x + 3)² - 2² = (x + 3 - 2)(x + 3 + 2) = (x + 1)(x + 5)"
+      },
+      {
+        id: 4,
+        level: "ស្រួល",
+        levelClass: "level-easy",
+        expression: "D = x² - 2x - 8",
+        options: [
+          { key: "A", text: "(x - 4)(x + 2)" },
+          { key: "B", text: "(x + 4)(x - 2)" },
+          { key: "C", text: "(x - 1)(x + 8)" },
+          { key: "D", text: "(x + 1)(x - 8)" }
+        ],
+        correct: "A",
+        solution: "x² - 2x - 8 = (x² - 2x + 1) - 1 - 8 = (x - 1)² - 9 = (x - 1)² - 3² = (x - 1 - 3)(x - 1 + 3) = (x - 4)(x + 2)"
+      },
+
+      // ================= កម្រិតមធ្យម (៤ លំហាត់ - តួទី២ មានមេគុណជាលេខសេស) =================
+      {
+        id: 5,
+        level: "មធ្យម",
+        levelClass: "level-medium",
+        expression: "E = x² + 5x + 6",
+        options: [
+          { key: "A", text: "(x - 2)(x - 3)" },
+          { key: "B", text: "(x + 2)(x + 3)" },
+          { key: "C", text: "(x + 1)(x + 6)" },
+          { key: "D", text: "(x - 1)(x - 6)" }
+        ],
+        correct: "B",
+        solution: "វិធីបំពេញជាការេ៖ x² + 2(x)(5/2) + (5/2)² - 25/4 + 6 = (x + 5/2)² - 1/4 = (x + 5/2 - 1/2)(x + 5/2 + 1/2) = (x + 2)(x + 3) ឬបំបែកតួ៖ x² + 2x + 3x + 6 = x(x + 2) + 3(x + 2) = (x + 2)(x + 3)"
+      },
+      {
+        id: 6,
+        level: "មធ្យម",
+        levelClass: "level-medium",
+        expression: "F = x² - 7x + 10",
+        options: [
+          { key: "A", text: "(x - 2)(x - 5)" },
+          { key: "B", text: "(x + 2)(x + 5)" },
+          { key: "C", text: "(x - 1)(x - 10)" },
+          { key: "D", text: "(x + 1)(x - 10)" }
+        ],
+        correct: "A",
+        solution: "វិធីបំពេញជាការេ៖ x² - 2(x)(7/2) + (7/2)² - 49/4 + 10 = (x - 7/2)² - 9/4 = (x - 7/2 - 3/2)(x - 7/2 + 3/2) = (x - 5)(x - 2) ឬបំបែកតួ៖ x² - 2x - 5x + 10 = x(x - 2) - 5(x - 2) = (x - 2)(x - 5)"
+      },
+      {
+        id: 7,
+        level: "មធ្យម",
+        levelClass: "level-medium",
+        expression: "G = x² + 3x - 10",
+        options: [
+          { key: "A", text: "(x - 2)(x - 5)" },
+          { key: "B", text: "(x + 2)(x - 5)" },
+          { key: "C", text: "(x - 2)(x + 5)" },
+          { key: "D", text: "(x + 1)(x - 10)" }
+        ],
+        correct: "C",
+        solution: "វិធីបំពេញជាការេ៖ x² + 2(x)(3/2) + (3/2)² - 9/4 - 10 = (x + 3/2)² - 49/4 = (x + 3/2 - 7/2)(x + 3/2 + 7/2) = (x - 2)(x + 5) ឬបំបែកតួ៖ x² - 2x + 5x - 10 = x(x - 2) + 5(x - 2) = (x - 2)(x + 5)"
+      },
+      {
+        id: 8,
+        level: "មធ្យម",
+        levelClass: "level-medium",
+        expression: "H = x² - 9x + 14",
+        options: [
+          { key: "A", text: "(x + 2)(x + 7)" },
+          { key: "B", text: "(x - 2)(x - 7)" },
+          { key: "C", text: "(x - 1)(x - 14)" },
+          { key: "D", text: "(x + 1)(x - 14)" }
+        ],
+        correct: "B",
+        solution: "វិធីបំពេញជាការេ៖ x² - 2(x)(9/2) + (9/2)² - 81/4 + 14 = (x - 9/2)² - 25/4 = (x - 9/2 - 5/2)(x - 9/2 + 5/2) = (x - 7)(x - 2) ឬបំបែកតួ៖ x² - 2x - 7x + 14 = x(x - 2) - 7(x - 2) = (x - 2)(x - 7)"
+      },
+
+      // ================= កម្រិតពិបាក (២ លំហាត់ - តួទី១ មានមេគុណខុសពី១) =================
+      {
+        id: 9,
+        level: "ពិបាក",
+        levelClass: "level-hard",
+        expression: "I = 2x² + 7x + 3",
+        options: [
+          { key: "A", text: "(2x + 1)(x + 3)" },
+          { key: "B", text: "(2x + 3)(x + 1)" },
+          { key: "C", text: "(2x - 1)(x - 3)" },
+          { key: "D", text: "(x + 1)(2x + 6)" }
+        ],
+        correct: "A",
+        solution: "វិធីបំបែកតួ៖ 2x² + 6x + x + 3 = 2x(x + 3) + 1(x + 3) = (2x + 1)(x + 3) ឬវិធីបន្ថែមបន្ថយតួ/បំពេញការេ៖ 2[x² + 2(x)(7/4) + (7/4)² - 49/16 + 3/2] = 2[(x + 7/4)² - 25/16] = 2(x + 7/4 - 5/4)(x + 7/4 + 5/4) = 2(x + 1/2)(x + 3) = (2x + 1)(x + 3)"
+      },
+      {
+        id: 10,
+        level: "ពិបាក",
+        levelClass: "level-hard",
+        expression: "J = 3x² - 5x - 2",
+        options: [
+          { key: "A", text: "(3x - 1)(x + 2)" },
+          { key: "B", text: "(3x + 2)(x - 1)" },
+          { key: "C", text: "(3x + 1)(x - 2)" },
+          { key: "D", text: "(3x - 2)(x + 1)" }
+        ],
+        correct: "C",
+        solution: "វិធីបំបែកតួ៖ 3x² - 6x + x - 2 = 3x(x - 2) + 1(x - 2) = (3x + 1)(x - 2) ឬវិធីបន្ថែមបន្ថយតួ/បំពេញការេ៖ 3[x² - 2(x)(5/6) + (5/6)² - 25/36 - 2/3] = 3[(x - 5/6)² - 49/36] = 3(x - 5/6 - 7/6)(x - 5/6 + 7/6) = 3(x - 2)(x + 1/3) = (x - 2)(3x + 1)"
+      }
+    ];
+
+    let studentData = { name: "", gender: "", class: "", id: "", date: "" };
+    let currentIndex = 0;
+    let studentAnswers = new Array(questions.length).fill(null);
+
+    window.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("quiz-date").value = new Date().toISOString().split("T")[0];
+    });
+
+    function toKhmerNum(num) {
+      const khmerDigits = ["០", "១", "២", "៣", "៤", "៥", "៦", "៧", "៨", "៩"];
+      return num.toString().split("").map(ch => khmerDigits[ch] || ch).join("");
+    }
+
+    function showScreen(screenId) {
+      document.querySelectorAll(".screen").forEach(el => el.classList.remove("active"));
+      document.getElementById(screenId).classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function startQuiz() {
+      const name = document.getElementById("student-name").value.trim();
+      const gender = document.getElementById("student-gender").value;
+      const studentClass = document.getElementById("student-class").value.trim();
+      const id = document.getElementById("student-id").value.trim();
+      const date = document.getElementById("quiz-date").value;
+
+      if (!name || !gender || !studentClass) {
+        alert("សូមបំពេញឈ្មោះ ភេទ និងថ្នាក់ឱ្យបានគ្រប់គ្រាន់!");
+        return;
+      }
+
+      studentData = {
+        name,
+        gender,
+        class: studentClass,
+        id: id || "គ្មាន",
+        date: date || new Date().toISOString().split("T")[0]
+      };
+
+      currentIndex = 0;
+      studentAnswers = new Array(questions.length).fill(null);
+
+      document.getElementById("quiz-student-tag").textContent = `សិស្ស៖ ${studentData.name} (${studentData.class})`;
+      renderQuestion();
+      showScreen("screen-quiz");
+    }
+
+    function renderQuestion() {
+      const q = questions[currentIndex];
+      document.getElementById("quiz-alert").style.display = "none";
+
+      document.getElementById("quiz-progress-label").textContent = `📝 លំហាត់ ${toKhmerNum(currentIndex + 1)} / ${toKhmerNum(questions.length)}`;
+      document.getElementById("progress-bar-fill").style.width = (((currentIndex + 1) / questions.length) * 100) + "%";
+
+      // បង្ហាញកម្រិតលំហាត់
+      const badge = document.getElementById("question-level-badge");
+      badge.textContent = `កម្រិត៖ ${q.level}`;
+      badge.className = `level-badge ${q.levelClass}`;
+
+      document.getElementById("question-expression").textContent = q.expression;
+
+      const container = document.getElementById("options-container");
+      container.innerHTML = "";
+
+      const currentSelected = studentAnswers[currentIndex];
+
+      q.options.forEach(opt => {
+        const isSelected = currentSelected === opt.key;
+        const card = document.createElement("div");
+        card.className = "option-card" + (isSelected ? " selected" : "");
+        card.onclick = () => selectOption(opt.key);
+
+        card.innerHTML = `
+          <div class="option-radio"></div>
+          <div class="option-label">${opt.key}.</div>
+          <div class="option-text">${opt.text}</div>
+        `;
+        container.appendChild(card);
+      });
+
+      document.getElementById("btn-prev").disabled = currentIndex === 0;
+
+      if (currentIndex === questions.length - 1) {
+        document.getElementById("btn-next").style.display = "none";
+        document.getElementById("btn-finish").style.display = "inline-flex";
+      } else {
+        document.getElementById("btn-next").style.display = "inline-flex";
+        document.getElementById("btn-finish").style.display = "none";
+      }
+    }
+
+    function selectOption(key) {
+      studentAnswers[currentIndex] = key;
+      document.getElementById("quiz-alert").style.display = "none";
+      renderQuestion();
+    }
+
+    function prevQuestion() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestion();
+      }
+    }
+
+    function nextQuestion() {
+      if (!studentAnswers[currentIndex]) {
+        document.getElementById("quiz-alert").style.display = "block";
+        return;
+      }
+      if (currentIndex < questions.length - 1) {
+        currentIndex++;
+        renderQuestion();
+      }
+    }
+
+    function finishQuiz() {
+      if (!studentAnswers[currentIndex]) {
+        document.getElementById("quiz-alert").style.display = "block";
+        return;
+      }
+
+      let correctCount = 0;
+      questions.forEach((q, idx) => {
+        if (studentAnswers[idx] === q.correct) correctCount++;
+      });
+
+      const wrongCount = questions.length - correctCount;
+      const pct = Math.round((correctCount / questions.length) * 100);
+
+      document.getElementById("res-name").textContent = studentData.name;
+      document.getElementById("res-gender").textContent = studentData.gender;
+      document.getElementById("res-class").textContent = studentData.class;
+      document.getElementById("res-id-date").textContent = `${studentData.id} • ${studentData.date}`;
+
+      document.getElementById("res-score").textContent = `${toKhmerNum(correctCount)} / ${toKhmerNum(questions.length)}`;
+      document.getElementById("res-pct").textContent = `${toKhmerNum(pct)}%`;
+      document.getElementById("res-correct").textContent = toKhmerNum(correctCount);
+      document.getElementById("res-wrong").textContent = toKhmerNum(wrongCount);
+
+      const emojiEl = document.getElementById("result-emoji");
+      const titleEl = document.getElementById("result-greeting");
+      const feedbackEl = document.getElementById("result-feedback");
+
+      if (correctCount === 10) {
+        emojiEl.textContent = "🏆";
+        titleEl.textContent = "ពូកែឥតខ្ចោះ! ទទួលបានពិន្ទុពេញ";
+        feedbackEl.textContent = "អ្នកពិតជាយល់ច្បាស់គ្រប់កម្រិត ទាំងការបំពេញជាការេ និងការបំបែកបន្ថែមបន្ថយតួ!";
+      } else if (correctCount >= 8) {
+        emojiEl.textContent = "🌟";
+        titleEl.textContent = "លទ្ធផលល្អប្រសើរណាស់!";
+        feedbackEl.textContent = "អ្នកធ្វើបានល្អណាស់លើកម្រិតភាគច្រើន! សូមបន្តការអនុវត្តបន្ថែម។";
+      } else if (correctCount >= 5) {
+        emojiEl.textContent = "👍";
+        titleEl.textContent = "លទ្ធផលល្អបង្គួរ!";
+        feedbackEl.textContent = "អ្នកដោះស្រាយបានកម្រិតមូលដ្ឋានបានល្អ ប៉ុន្តែត្រូវពង្រឹងលំហាត់កម្រិតមធ្យម និងពិបាក។";
+      } else {
+        emojiEl.textContent = "💪";
+        titleEl.textContent = "កុំទាន់អស់សង្ឃឹម ត្រូវខិតខំបន្ថែមទៀត!";
+        feedbackEl.textContent = "សូមពិនិត្យមើលដំណោះស្រាយលម្អិតខាងក្រោម រួចសាកល្បងធ្វើម្តងទៀតណា៎!";
+      }
+
+      const tbody = document.getElementById("review-table-body");
+      tbody.innerHTML = "";
+
+      questions.forEach((q, idx) => {
+        const userChoice = studentAnswers[idx];
+        const isCorrect = userChoice === q.correct;
+        const userOpt = q.options.find(o => o.key === userChoice);
+        const correctOpt = q.options.find(o => o.key === q.correct);
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><strong>${toKhmerNum(idx + 1)}</strong></td>
+          <td>
+            <strong>${q.expression}</strong> <span style="font-size:0.75rem; color:#64748b;">(${q.level})</span>
+            <button class="btn-solution" onclick="toggleSolution(${idx})">🔍 មើលដំណោះស្រាយ</button>
+            <div id="sol-${idx}" class="solution-box">
+              <strong>ដំណោះស្រាយ៖</strong><br/>
+              ${q.solution}
+            </div>
+          </td>
+          <td style="color: ${isCorrect ? '#059669' : '#dc2626'}; font-weight: 600;">
+            (${userOpt ? userOpt.key : '-'}) ${userOpt ? userOpt.text : 'មិនបានឆ្លើយ'}
+          </td>
+          <td style="color: #059669; font-weight: 600;">
+            (${correctOpt.key}) ${correctOpt.text}
+          </td>
+          <td>
+            <span class="badge-status ${isCorrect ? 'badge-correct' : 'badge-wrong'}">
+              ${isCorrect ? '🟢 ត្រឹមត្រូវ' : '🔴 ខុស'}
+            </span>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      showScreen("screen-result");
+    }
+
+    function toggleSolution(idx) {
+      const box = document.getElementById(`sol-${idx}`);
+      if (box) box.classList.toggle("show");
+    }
+
+    function restartQuiz() {
+      if (confirm("តើអ្នកពិតជាចង់ធ្វើលំហាត់ម្តងទៀតមែនទេ?")) {
+        currentIndex = 0;
+        studentAnswers = new Array(questions.length).fill(null);
+        showScreen("screen-student-info");
+      }
+    }
+
+    // ទាញយករូបភាពផ្ទាំងលទ្ធផលជា PNG
+    function downloadImage() {
+      const captureElement = document.getElementById("capture-area");
+      
+      // បើកដំណោះស្រាយទាំងអស់ពេល Export ដើម្បីឱ្យរូបភាពមានព័ត៌មានលម្អិត
+      const solutions = captureElement.querySelectorAll(".solution-box");
+      solutions.forEach(s => s.classList.add("show"));
+
+      html2canvas(captureElement, {
+        scale: 2, // គុណភាពខ្ពស់ច្បាស់ត្រជាក់ភ្នែក
+        backgroundColor: "#ffffff",
+        useCORS: true
+      }).then(canvas => {
+        const link = document.createElement("a");
+        link.download = `លទ្ធផល_${studentData.name.replace(/\s+/g, '_')}_វិទ្យាល័យបឹងត្របែក.png`;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      }).catch(err => {
+        alert("មានបញ្ហាក្នុងការទាញយករូបភាព សូមសាកល្បងម្តងទៀត!");
+        console.error(err);
+      });
+    }
+
+    // ទាញយកទិន្នន័យជា CSV
+    function downloadCSV() {
+      let correctCount = 0;
+      questions.forEach((q, idx) => {
+        if (studentAnswers[idx] === q.correct) correctCount++;
+      });
+      const pct = Math.round((correctCount / questions.length) * 100);
+
+      let csv = "\uFEFF"; 
+      csv += "របាយការណ៍លទ្ធផលលំហាត់គណិតវិទ្យាថ្នាក់ទី៩ - សាលារៀនជំនាន់ថ្មី វិទ្យាល័យបឹងត្របែក\n";
+      csv += `រៀបរៀងដោយ,លោកគ្រូ ចាន់ សុខហេង\n`;
+      csv += `ឈ្មោះសិស្ស,${studentData.name}\n`;
+      csv += `ភេទ,${studentData.gender}\n`;
+      csv += `ថ្នាក់,${studentData.class}\n`;
+      csv += `លេខសម្គាល់,${studentData.id}\n`;
+      csv += `កាលបរិច្ឆេទ,${studentData.date}\n`;
+      csv += `ពិន្ទុ,${correctCount} / ${questions.length}\n`;
+      csv += `ភាគរយ,${pct}%\n\n`;
+
+      csv += "ល.រ,កម្រិត,កន្សោមលំហាត់,ចម្លើយសិស្ស,ចម្លើយត្រឹមត្រូវ,ស្ថានភាព\n";
+
+      questions.forEach((q, idx) => {
+        const userChoice = studentAnswers[idx];
+        const isCorrect = userChoice === q.correct;
+        const userOpt = q.options.find(o => o.key === userChoice);
+        const correctOpt = q.options.find(o => o.key === q.correct);
+
+        const uText = userOpt ? `"${userOpt.key}. ${userOpt.text}"` : '"មិនបានឆ្លើយ"';
+        const cText = `"${correctOpt.key}. ${correctOpt.text}"`;
+        const status = isCorrect ? "ត្រឹមត្រូវ" : "មិនត្រឹមត្រូវ";
+
+        csv += `${idx + 1},${q.level},"${q.expression}",${uText},${cText},${status}\n`;
+      });
+
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `លទ្ធផល_${studentData.name.replace(/\s+/g, '_')}_NGS.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
